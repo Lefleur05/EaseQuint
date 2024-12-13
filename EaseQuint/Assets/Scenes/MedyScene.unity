@@ -443,6 +443,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 67de918624ea4b64da7b71962f446c82, type: 3}
+--- !u!114 &1214127179 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4796634052947110591, guid: b630bb225d1fa63488a5e5ddcc7fa3d1, type: 3}
+  m_PrefabInstance: {fileID: 532741844}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2251bb73c9c22d49a89104840504657, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1267807742
 GameObject:
   m_ObjectHideFlags: 0
@@ -573,6 +584,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputRef: {fileID: 0}
+  switchbutton: {fileID: 1214127179}
   currentAcceleration: 0
   maxAcceleration: 3
   accelerateFactor: 0.01
