@@ -8,6 +8,9 @@ using UnityEngine.UI;
 
 public class SwitchButton : MonoBehaviour
 {
+    public event Action<bool> OnSwitchStart;
+    public event Action<bool> OnSwitchEnd;
+
     [SerializeField] Button button;
     [SerializeField] bool isActivate = false;
     [SerializeField] bool isOnTargetPos = false;
@@ -47,6 +50,8 @@ public class SwitchButton : MonoBehaviour
         colorButton = GetComponent<Image>();
         textMeshPro = GetComponentInChildren<TextMeshProUGUI>();
         button.onClick.AddListener(Execute);
+        OnSwitchStart += TestEvent;
+        OnSwitchEnd += TestEvent;
     }
 
     void Switch()
@@ -125,13 +130,23 @@ public class SwitchButton : MonoBehaviour
         isOnTargetPos = false;
         timer = 0;
         SwitchText();
+        OnSwitchStart?.Invoke(isActivate);
     }
 
     void CheckIsOnTargetPos()
     {
         Vector3 _targetPos = isActivate ? ActivatePos : notActivatePos;
         isOnTargetPos = Vector3.Distance(_targetPos, transform.localPosition) <= 0.1f;
+        if (isOnTargetPos)
+        {
+            OnSwitchEnd?.Invoke(isActivate);
+        }
         //Debug.Log(Vector3.Distance(_targetPos, transform.localPosition));
+    }
+
+    void TestEvent(bool _isActivate)
+    {
+        Debug.Log("OnSwitchEnd \n isActivate = " + isActivate + " \n _isActivate = "+ _isActivate);
     }
 
 }
