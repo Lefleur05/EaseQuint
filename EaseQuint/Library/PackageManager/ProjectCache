@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638696863862751475
-    m_Hash: 2921592027
+      ticks: 638696874262007230
+    m_Hash: 3730130058
   m_LockFileStatus:
     m_FilePath: D:/Bouquet Nicolas/1.ExerciceEtCour/Unity/UnityProject/Project/EaseQuint/EaseQuint/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638696863863135262
-    m_Hash: 3216798493
+      ticks: 638696874262012282
+    m_Hash: 3610766786
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
