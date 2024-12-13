@@ -29,12 +29,21 @@ public partial class @IAA_Car: IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""Accelerate"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""add65097-9718-4260-b6e2-46cf60c9190d"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""TurnAction"",
+                    ""type"": ""Value"",
+                    ""id"": ""0019a0e1-d7fd-4231-88da-86db478b07e3"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -70,6 +79,39 @@ public partial class @IAA_Car: IInputActionCollection2, IDisposable
                     ""action"": ""Accelerate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""62e4ad0b-834b-4d63-8baa-e55b66efb424"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TurnAction"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""1c94c15c-3348-4000-aff5-b0a339f3a247"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TurnAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""9e1e8266-0780-41c4-909b-136556d7b6d7"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TurnAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -79,6 +121,7 @@ public partial class @IAA_Car: IInputActionCollection2, IDisposable
         // Car
         m_Car = asset.FindActionMap("Car", throwIfNotFound: true);
         m_Car_Accelerate = m_Car.FindAction("Accelerate", throwIfNotFound: true);
+        m_Car_TurnAction = m_Car.FindAction("TurnAction", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -141,11 +184,13 @@ public partial class @IAA_Car: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Car;
     private List<ICarActions> m_CarActionsCallbackInterfaces = new List<ICarActions>();
     private readonly InputAction m_Car_Accelerate;
+    private readonly InputAction m_Car_TurnAction;
     public struct CarActions
     {
         private @IAA_Car m_Wrapper;
         public CarActions(@IAA_Car wrapper) { m_Wrapper = wrapper; }
         public InputAction @Accelerate => m_Wrapper.m_Car_Accelerate;
+        public InputAction @TurnAction => m_Wrapper.m_Car_TurnAction;
         public InputActionMap Get() { return m_Wrapper.m_Car; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -158,6 +203,9 @@ public partial class @IAA_Car: IInputActionCollection2, IDisposable
             @Accelerate.started += instance.OnAccelerate;
             @Accelerate.performed += instance.OnAccelerate;
             @Accelerate.canceled += instance.OnAccelerate;
+            @TurnAction.started += instance.OnTurnAction;
+            @TurnAction.performed += instance.OnTurnAction;
+            @TurnAction.canceled += instance.OnTurnAction;
         }
 
         private void UnregisterCallbacks(ICarActions instance)
@@ -165,6 +213,9 @@ public partial class @IAA_Car: IInputActionCollection2, IDisposable
             @Accelerate.started -= instance.OnAccelerate;
             @Accelerate.performed -= instance.OnAccelerate;
             @Accelerate.canceled -= instance.OnAccelerate;
+            @TurnAction.started -= instance.OnTurnAction;
+            @TurnAction.performed -= instance.OnTurnAction;
+            @TurnAction.canceled -= instance.OnTurnAction;
         }
 
         public void RemoveCallbacks(ICarActions instance)
@@ -185,5 +236,6 @@ public partial class @IAA_Car: IInputActionCollection2, IDisposable
     public interface ICarActions
     {
         void OnAccelerate(InputAction.CallbackContext context);
+        void OnTurnAction(InputAction.CallbackContext context);
     }
 }
