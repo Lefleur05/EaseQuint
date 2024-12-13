@@ -7,6 +7,7 @@ public class AccelerationComponent : MonoBehaviour
 {
     public event Action<float> onAcceleration;
     [SerializeField] InputComponent inputRef = null;
+    [SerializeField] SwitchButton switchbutton = null;
     [SerializeField] float currentAcceleration = 0, maxAcceleration = 10,accelerateFactor=0.01f,deccelerateFactor=0.02f, currentSpeed=0;
 
     [SerializeField] bool inIntQuint = true;
@@ -23,6 +24,9 @@ public class AccelerationComponent : MonoBehaviour
     void Init()
     {
         inputRef=GetComponent<InputComponent>();
+        if (!switchbutton) return;
+        switchbutton.OnSwitchEnd += SetInQuind;
+
     }
     // Update is called once per frame
     void Update()
@@ -68,5 +72,8 @@ public class AccelerationComponent : MonoBehaviour
         return 1 - Mathf.Pow(1 - _value, 5);
     }
 
-    
+    void SetInQuind(bool _value)
+    {
+        inIntQuint = _value;
+    }
 }
