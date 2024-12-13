@@ -11,6 +11,9 @@ public class AccelerationComponent : MonoBehaviour
 
     [SerializeField] bool inIntQuint = true;
 
+
+    public float MaxAcceleration=>maxAcceleration;
+    public float CurrentAcceleration=> currentAcceleration;
     // Start is called before the first frame update
     void Start()
     {
